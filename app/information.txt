@@ -1,0 +1,1 @@
+access the database: docker exec -it pgvector-db psql -U postgres -d rag_db   
