@@ -1,11 +1,12 @@
 import shutil
 import os
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends, UploadFile, File, Request
 from app.schemas.document import UploadDocumentResponse
 from app.tasks.ingestion_tasks import ingest_pdf_task
 from celery.result import AsyncResult
 from app.core.celery_app import celery_app
 from app.core.deps import get_current_user_id
+from app.core.limiter import limiter
 
 router = APIRouter()
 
@@ -13,7 +14,8 @@ UPLOAD_DIR = "app/uploaded_files"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @router.post("/documents/upload")
-def upload_document(file: UploadFile = File(...), user_id: int = Depends(get_current_user_id)):
+@limiter.limit("3/minute")
+def upload_document(request: Request, file: UploadFile = File(...), user_id: int = Depends(get_current_user_id)):
     save_path = os.path.join(UPLOAD_DIR, file.filename)
 
     with open(save_path, "wb") as f:

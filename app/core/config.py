@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     jwt_secret: str
     expire_time: int
     algorithm: str
+    redis_url: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
