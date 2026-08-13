@@ -1,1 +1,5 @@
-access the database: docker exec -it pgvector-db psql -U postgres -d rag_db   
+access the database: 
+docker exec -it pgvector-db psql -U postgres -d rag_db
+
+run this celery alongside the fastapi server:
+celery -A app.core.celery_app worker --loglevel=info --pool=solo

@@ -2,8 +2,11 @@ from sqlalchemy import select
 from app.core.database import SessionLocal
 from app.models.chunk import Chunk
 from app.services.embeddings import embed_text
+from app.services.documents import verify_document_owner
 
-def search_similar(query: str, document_id: int, top_k: int = 3):
+def search_similar(user_id: int, query: str, document_id: int, top_k: int = 3):
+    verify_document_owner(document_id, user_id)
+
     query_vector = embed_text(query)
     db = SessionLocal()
     results = db.scalars(
