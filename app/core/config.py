@@ -6,7 +6,9 @@ class Settings(BaseSettings):
     jwt_secret: str
     expire_time: int
     algorithm: str
-    redis_url: str
+    #redis_url: str
+    celery_broker_url: str
+    celery_result_backend: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
