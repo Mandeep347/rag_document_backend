@@ -1,3 +1,4 @@
+![CI](https://github.com/Mandeep347/rag_document_backend/actions/workflows/ci.yml/badge.svg)
 # AI Document Q&A — RAG Backend
 
 A production-style Retrieval-Augmented Generation (RAG) API. Users upload documents (PDF, DOCX, TXT), the system chunks and embeds them into a vector store, and answers questions grounded strictly in the uploaded content — with streaming responses, per-user isolation, and async background processing.
