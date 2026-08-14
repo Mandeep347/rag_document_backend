@@ -10,6 +10,19 @@ jobs:
   build-and-check:
     runs-on: ubuntu-latest
 
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      EXPIRE_TIME: ${{ secrets.EXPIRE_TIME }}
+      ALGORITHM: ${{ secrets.ALGORITHM }}
+      CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
+      CELERY_RESULT_BACKEND: ${{ secrets.CELERY_RESULT_BACKEND }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_BUCKET: ${{ secrets.SUPABASE_BUCKET }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
