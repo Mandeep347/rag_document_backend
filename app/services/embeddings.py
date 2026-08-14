@@ -1,7 +1,12 @@
-from sentence_transformers import SentenceTransformer
-from sentence_transformers.util import cos_sim
+import requests
+from app.core.config import settings
 
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+def embed_text(text: str) -> list[float]:
+    response = requests.post(
+        "https://api.cohere.com/v1/embed",
+        headers={"Authorization": f"Bearer {settings.cohere_api_key}"},
+        json={"texts": [text], "model": "embed-english-light-v3.0", "input_type": "search_document"},
+    )
 
-def embed_text(text: str):
-    return model.encode(text).tolist()
+    response.raise_for_status()
+    return response.json()["embeddings"][0]
