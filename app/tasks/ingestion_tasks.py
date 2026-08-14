@@ -2,8 +2,8 @@ from app.core.celery_app import celery_app
 from app.services.ingestion import ingest_pdf
 
 @celery_app.task
-def ingest_pdf_task(file_path: str, filename: str, user_id: int):
-    document_id, chunk_count = ingest_pdf(file_path, filename, user_id)
+def ingest_pdf_task(storage_path: str, filename: str, user_id: int):
+    document_id, chunk_count = ingest_pdf(storage_path, filename, user_id)
     return {
         "document_id": document_id, 
         "chunk_created": chunk_count,

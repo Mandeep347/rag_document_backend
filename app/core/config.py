@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     #redis_url: str
     celery_broker_url: str
     celery_result_backend: str
+    supabase_url: str
+    supabase_key: str
+    supabase_bucket: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
